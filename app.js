@@ -18,7 +18,10 @@ var blogRoutes=require("./routes/blogs"),
 
 // APP Config
 //seedDB();
-mongoose.connect('mongodb://localhost:27017/blog_app', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('mongodb://localhost:27017/blog_app', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://arvindyadav:arvind2002@blog-app.yvbmp.mongodb.net/blog_app?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+
+
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
