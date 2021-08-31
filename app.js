@@ -49,7 +49,7 @@ app.use(indexRoutes);
 app.use(commentRoutes);
 app.use(blogRoutes);
 
-
-app.listen(process.env.PORT || 3000, function() {
+var port=process.env.PORT || 3000;
+app.listen(port, function() {
     console.log("The BlogApp Server has Started!!!");
 });
