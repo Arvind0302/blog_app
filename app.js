@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express = require("express"),
     expressSanitizer = require("express-sanitizer"),
     methodOverride = require("method-override"),
@@ -18,9 +20,7 @@ var blogRoutes=require("./routes/blogs"),
 
 // APP Config
 //seedDB();
-//mongoose.connect('mongodb://localhost:27017/blog_app', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect('mongodb+srv://arvindyadav:arvind2002@blog-app.yvbmp.mongodb.net/blog_app?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
-
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/blog_app', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -31,8 +31,8 @@ app.use(flash());
 
 // Passport Configuration
 app.use(require("express-session")({
-  secret:"my name is arvind",
-  resave:false,
+  secret: process.env.SESSION_SECRET || "development_secret",
+  resave: false,
   saveUninitialized: false
 }));
 app.use(passport.initialize());
@@ -54,5 +54,5 @@ app.use(blogRoutes);
 
 var port=process.env.PORT || 3000;
 app.listen(port, function() {
-    console.log("The BlogApp Server has Started!!!");
+    console.log("The BlogApp Server has Started!!!", `http://localhost:${port}`);
 });
